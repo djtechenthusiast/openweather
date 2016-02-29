@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/POC/!svn/ver/2174/UI/Dev/galaxy-ui/libs
+END
+ng-csv.min.js
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/POC/!svn/ver/528/UI/Dev/galaxy-ui/libs/ng-csv.min.js
+END
+kendo.all.min.js
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/POC/!svn/ver/1689/UI/Dev/galaxy-ui/libs/kendo.all.min.js
+END
+ngDialog.min.js
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/POC/!svn/ver/271/UI/Dev/galaxy-ui/libs/ngDialog.min.js
+END
+ngDialog.js
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/POC/!svn/ver/271/UI/Dev/galaxy-ui/libs/ngDialog.js
+END
+gxAppFunctions.js
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/POC/!svn/ver/1642/UI/Dev/galaxy-ui/libs/gxAppFunctions.js
+END
+WebORB.js
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/POC/!svn/ver/2104/UI/Dev/galaxy-ui/libs/WebORB.js
+END
+ng-table.js
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/POC/!svn/ver/528/UI/Dev/galaxy-ui/libs/ng-table.js
+END
+angular-tree-control.js
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/POC/!svn/ver/818/UI/Dev/galaxy-ui/libs/angular-tree-control.js
+END

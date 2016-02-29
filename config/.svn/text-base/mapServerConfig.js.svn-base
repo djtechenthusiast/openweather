@@ -1,0 +1,64 @@
+var express = require('express');
+
+var app = express();
+var connections = [];
+
+
+var port = process.env.PORT || 3000;
+
+app.configure(function(){
+  app.use(express.bodyParser());
+  app.use(app.router);
+});
+
+app.listen(port, function() {
+  console.log("Listening on " + port);
+
+app.get('/', function(req, res){
+	res.contentType('event-stream');
+	res.setHeader("Access-Control-Allow-Origin", "*");
+	res.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE, OPTIONS");
+	res.setHeader("Access-Control-Allow-Headers", "Content-Type, X-PINGOTHER");
+		res.setHeader("Access-Control-Max-Age", "1728000");
+	res.setHeader("Cache-Control", "no-cache");
+	res.setHeader("Connection", "keep-alive");
+	res.write('data: success\n\n');
+
+	connections[connections.length] = res;
+	process.stdout.write(""+connections.length);
+	
+	//test functionality for writing to stored streams
+	if(connections.length > 1){
+		connections[0].write("data: new connection, new size is "+connections.length+"\n\n");
+	}
+	
+	req.on("close", function(){
+		var index = connections.indexOf(res);
+		
+		if(index > -1){
+			connections.splice(index,1);
+			process.stdout.write("\nremoved "+ index + "" + connections.length+"\n");
+		}
+		else{
+			process.stdout.write("\nnot found!!!");
+		}
+
+		delete res;
+	})
+});
+
+app.post('/', function(req, res){
+	for(i = 0; i < connections.length; i++)
+	{
+		process.stdout.write("\n"+req.body.lat+","+req.body.lon);
+		
+		connections[i].write("data: {\"eid\":\""+req.body.eid+"\","+"\"lat\":\""+req.body.lat+"\","+
+			"\"lon\":\""+req.body.lon+"\"}\n\n");
+
+		
+	}
+	process.stdout.write("\n");
+	res.end();
+});
+
+});

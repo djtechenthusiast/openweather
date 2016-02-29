@@ -1,0 +1,167 @@
+/**
+* Copyright 2014 Pacific Controls Software Services LLC (PCSS). All Rights Reserved.
+*
+* This software is the property of Pacific Controls  Software  Services LLC  and  its
+* suppliers. The intellectual and technical concepts contained herein are proprietary 
+* to PCSS. Dissemination of this information or  reproduction  of  this  material  is
+* strictly forbidden  unless  prior  written  permission  is  obtained  from  Pacific 
+* Controls Software Services.
+* 
+* PCSS MAKES NO REPRESENTATION OR WARRANTIES ABOUT THE SUITABILITY  OF  THE  SOFTWARE,
+* EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE  IMPLIED  WARRANTIES  OF
+* MERCHANTANILITY, FITNESS FOR A PARTICULAR PURPOSE,  OR  NON-INFRINGMENT.  PCSS SHALL
+* NOT BE LIABLE FOR ANY DAMAGES SUFFERED BY LICENSEE AS A RESULT OF  USING,  MODIFYING
+* OR DISTRIBUTING THIS SOFTWARE OR ITS DERIVATIVES.
+*/
+
+/**
+ * Version    :    1.0 
+ * User       :    pcseg306
+ * Function   :   This file is controller for all the control flow related to homePage
+ */
+
+gxMainApp.controller("homeDefaultController", function ($scope, $modal ,$rootScope, $state, homeProfileDataService,adminFunctionsService) {
+	  
+	  
+	  $scope.notificationStatsChartData = [];
+	  $scope.notificationChartOptions = {};
+	  $scope.notificationChartOptions =  { title: {
+          position: "bottom",
+          text: ""
+      },
+      legend: {
+          visible: false
+      },
+      chartArea: {
+          background: ""
+      },
+      seriesDefaults: {
+          type: "donut",
+          startAngle: 150
+      },
+      series: [{
+          name: "By Action",
+          data:$scope.notificationStatsChartData,
+          labels: {
+              visible: false,
+              background: "transparent",
+              position: "outsideEnd",
+              template: "#= category #: \n #= value#"
+          }
+      }],
+      tooltip: {
+          visible: false,
+          template: "#= category #: \n #= value #"
+      }};
+	 
+	  /** function block for chart
+	   * 
+	   */
+	
+	  //Adding a watch for it. 
+	  $scope.$watchCollection('notificationStatsChartData', function(newData) {
+
+		    // Update data bindings with changes
+		    $scope.notificationChartOptions.series[0].data = newData;
+		});
+	  
+	  
+	  
+	  var watchArrLength =  $rootScope.$watch('notificationCount',function(data) {
+		  if(data){
+			  watchArrLength();
+			  $scope.arrProspects = [];
+			  $scope.arrProspects = angular.copy(adminFunctionsService.getArrayOfProspects());	
+			  
+			  
+			  //parse the counts for chart
+			  
+			  var statusHashMap = {};
+			  var actionHashMap = {};
+			  for(var i=0;i< $scope.arrProspects.length;i++){
+				  var currObj =  $scope.arrProspects[i];
+				  if(statusHashMap[currObj.currentStatusLabel] == null){
+					  statusHashMap[currObj.currentStatusLabel] = {};
+					  statusHashMap[currObj.currentStatusLabel].count = 1;
+				  }
+				  else if(statusHashMap[currObj.currentStatusLabel] ){
+					  statusHashMap[currObj.currentStatusLabel].count++;
+				  }
+				  
+				  if(actionHashMap[currObj.currentActionLabel] == null){
+					  actionHashMap[currObj.currentActionLabel] = {};
+					  actionHashMap[currObj.currentActionLabel].count = 1;
+				  }
+				  else if(actionHashMap[currObj.currentActionLabel] ){
+					  actionHashMap[currObj.currentActionLabel].count++;
+				  }
+				 
+			  }
+			  
+			  var tempArray = [];
+			  tempArray.length = 0;
+			  // {actionCount:, actionLabel}, statusLabel, statusCount}
+			  for (var action in actionHashMap){
+				  var objPush = {};
+				  objPush.actionCount  = actionHashMap[action].count ;
+				  objPush.actionLabel = action ;
+				  objPush.value  = actionHashMap[action].count ;
+				  objPush.category = action ;
+				  objPush.percentActionCount = Math.floor(objPush.actionCount/$rootScope.notificationCount);
+				  tempArray.push(objPush);
+			  }
+			  
+			  var objName  = {};
+			  objName.name = '';
+			  objName.data = tempArray;
+			  $scope.notificationStatsChartData = [];
+			  $scope.notificationStatsChartData.length = 0;
+			  $scope.notificationStatsChartData = tempArray;
+			  
+			  $scope.notificationChartOptions =  { title: {
+		          position: "bottom",
+		          text: ""
+		      },
+		      legend: {
+		          visible: false
+		      },
+		      chartArea: {
+		          background: ""
+		      },
+		      seriesDefaults: {
+		          type: "donut",
+		          startAngle: 150
+		      },
+		      series: [{
+		          name: "By Action",
+		          data: $scope.notificationStatsChartData,
+		          labels: {
+		              visible: true,
+		              background: "transparent",
+		              position: "outsideEnd",
+		              template: "#= category #: \n #= value#"
+		          }
+		      }],
+		      tooltip: {
+		          visible: true,
+		          template: "#= category #: \n #= value #"
+		      }};
+			  
+			  
+		  }
+		  
+	  });
+	
+
+      
+
+});
+
+gxMainApp.directive('disableNgAnimate', ['$animate', function($animate) {
+	  return {
+	    restrict: 'A',
+	    link: function(scope, element) {
+	      $animate.enabled(false, element);
+	    }
+	  };
+	}]);

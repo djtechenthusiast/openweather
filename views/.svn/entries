@@ -1,0 +1,70 @@
+10
+
+dir
+2684
+http://pcshq-svnpcss.pcs.com/svn/POC/UI/Dev/galaxy-ui/views
+http://pcshq-svnpcss.pcs.com/svn/POC
+
+
+
+2014-10-02T06:45:05.840294Z
+2683
+pcseg306
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+ff67637d-5107-7943-b4ba-5aa0e5ce7fae
+
+
+
+
+
+
+0
+
+()
+
+adminNotification
+dir
+
+applications
+dir
+
+comchannelManagement
+dir
+
+designerComp
+dir
+
+entityManagement
+dir
+
+hierarchyManagement
+dir
+
+home
+dir
+
+loginFlow
+dir
+
+roleManagement
+dir
+
+templateManagement
+dir
+
+userManagement
+dir
+

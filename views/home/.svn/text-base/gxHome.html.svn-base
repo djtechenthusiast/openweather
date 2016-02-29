@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<!--
+/**
+* Copyright 2014 Pacific Controls Software Services LLC (PCSS). All Rights Reserved.
+*
+* This software is the property of Pacific Controls  Software  Services LLC  and  its
+* suppliers. The intellectual and technical concepts contained herein are proprietary 
+* to PCSS. Dissemination of this information or  reproduction  of  this  material  is
+* strictly forbidden  unless  prior  written  permission  is  obtained  from  Pacific 
+* Controls Software Services.
+* 
+* PCSS MAKES NO REPRESENTATION OR WARRANTIES ABOUT THE SUITABILITY  OF  THE  SOFTWARE,
+* EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE  IMPLIED  WARRANTIES  OF
+* MERCHANTANILITY, FITNESS FOR A PARTICULAR PURPOSE,  OR  NON-INFRINGMENT.  PCSS SHALL
+* NOT BE LIABLE FOR ANY DAMAGES SUFFERED BY LICENSEE AS A RESULT OF  USING,  MODIFYING
+* OR DISTRIBUTING THIS SOFTWARE OR ITS DERIVATIVES.
+*/
+
+/**
+ * Version    :    1.0 
+ * User       :    pcseg306
+ * Function   :    Main Home Page (after successful login).
+ */
+
+-->
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="http://cdn.kendostatic.com/2014.2.903/styles/kendo.common.min.css" rel="stylesheet" />
+    <link href="http://cdn.kendostatic.com/2014.2.903/styles/kendo.bootstrap.min.css" rel="stylesheet" />
+    <link href="http://cdn.kendostatic.com/2014.2.903/styles/kendo.dataviz.min.css" rel="stylesheet" />
+    <link href="http://cdn.kendostatic.com/2014.2.903/styles/kendo.dataviz.bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="../themes/default/css/home/gxHome.css">
+
+
+</head>
+
+<body>
+
+
+<div id="wrapper">
+		
+		<div id="header">
+		      <div class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand">
+              <img src="../themes/default/images/gx-logo.png" alt="Galaxy 2021">
+            </a>
+          </div>            
+          <div class="navbar-collapse collapse" id="btnMenu">
+            <ul class="nav navbar-nav">
+              <li id="btnHome" class='{{currentMenuIndex == 1 ? "active":""}}'><a ng-click="goToHomeDefault()"><i class="gxIcon-home"></i></a>
+              </li>
+              <li class='{{currentMenuIndex == 2 ? "active":""}}'><a id="btnPopover" popover-template="../views/home/comps/mainMenuAccordian.html" popover-animation="true" data-container="body" popover-placement="bottom" data-toggle="popover"><i class="gxIcon-menu"></i></a>
+              </li>
+            </ul>         
+            <ul class="nav navbar-nav navbar-right">
+              <li class='{{currentMenuIndex == 3 ? "active":""}}'><a ng-click="open(3)"><i class="gxIcon-favorites"></i></a>
+              </li>
+              <li  ng-show="isAdmin" class='{{currentMenuIndex == 4 ? "active":""}}'><a ng-click="openSuperAdminRegistrationNotifications()"><i class="gxIcon-alert"></i><span class="alertsbadge">{{alertCount}}</span></a>
+              </li>
+              <li class='{{currentMenuIndex == 5 ? "active":""}}'><a ng-click="open(5)"><i class="gxIcon-dashboard"></i></a>
+              </li>
+              <li class='{{currentMenuIndex == 6 ? "active":""}}'><a ng-click="open(6)"><i class="gxIcon-help-global"></i></a>
+              </li>
+              <li class='{{currentMenuIndex == 7 ? "active":""}}'><a ng-click="open(7)"><i class="gxIcon-user-profile"></i><div class="navbar-usercontainer"><p class="navbar-username">{{loggedUser.userName}}</p><p class="navbar-userrole">{{loggedUser.roleDTO.name}}</p></div></a>
+              </li>
+              <li><a href="#"><i class="gxIcon-logout"></i></a>
+              </li>
+            </ul>
+          </div>	
+	
+          <!-- START: Breadcrumbs -->
+
+          <ol class="breadcrumb">You are here: &nbsp;
+            <li class="active">{{currentStateName}}</li>
+          </ol>
+
+          <!-- END: Breadcrumbs -->
+        </div>
+      </div>
+		
+		</div><!-- #header -->
+		
+		<div id="content">
+		<div class="container-fluid">
+		<ui-view></ui-view>
+		</div>
+		</div><!-- #content -->
+		
+		<div id="footer">
+		<footer>
+		<div class="container-fluid">
+          <div class="row">
+            <div class="col-lg-8 text-left">Copyright &copy; 2014 Pacific Controls. All Rights Reserved.</div>
+            <div class="col-lg-4 text-right"><a href ng-click="goToPrivacyPolicy()">Privacy Policy</a> | <a href ng-click="goToTermsConditions()">Terms & Conditions</a>
+            </div>
+          </div>
+          
+           	<!-- Panel for Alerts -->
+		<div class="row" >
+		 	<div  ng-repeat="alert in alerts" type="alert.type" close="alert.close($index)"><small>{{ alert.msg }}</small></div>
+		</div>
+        </div>
+        
+        
+		</footer>
+		
+		</div><!-- #footer -->
+</div>
+
+</body>
+
+</html>

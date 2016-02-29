@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<!--
+/**
+* Copyright 2014 Pacific Controls Software Services LLC (PCSS). All Rights Reserved.
+*
+* This software is the property of Pacific Controls  Software  Services LLC  and  its
+* suppliers. The intellectual and technical concepts contained herein are proprietary 
+* to PCSS. Dissemination of this information or  reproduction  of  this  material  is
+* strictly forbidden  unless  prior  written  permission  is  obtained  from  Pacific 
+* Controls Software Services.
+* 
+* PCSS MAKES NO REPRESENTATION OR WARRANTIES ABOUT THE SUITABILITY  OF  THE  SOFTWARE,
+* EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE  IMPLIED  WARRANTIES  OF
+* MERCHANTANILITY, FITNESS FOR A PARTICULAR PURPOSE,  OR  NON-INFRINGMENT.  PCSS SHALL
+* NOT BE LIABLE FOR ANY DAMAGES SUFFERED BY LICENSEE AS A RESULT OF  USING,  MODIFYING
+* OR DISTRIBUTING THIS SOFTWARE OR ITS DERIVATIVES.
+*/
+
+/**
+ * Version    :    1.0 
+ * User       :    pcseg306
+ * Function   :    Default Home Page.
+ */
+
+-->
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link href="../themes/default/css/designerComp/uiFormBuilder/kendo/kendo.common.min.css" rel="stylesheet" />
+   <link href="../themes/default/css/designerComp/uiFormBuilder/kendo/kendo.bootstrap.css" rel="stylesheet" />
+   <link href="../themes/default/css/designerComp/uiFormBuilder/kendo/kendo.dataviz.min.css" rel="stylesheet" />
+   <link rel="stylesheet" href="../themes/default/css/applications/mapDemo/gxMapApp.css" />
+   
+  <link rel="stylesheet" href="../themes/default/css/home/gxHomeDefault.css">
+  
+  <!-- DEMO PURPOSE - Slide css -->
+  <script type="text/javascript" src="../themes/default/css/home/demo/jQuery-1.8.3.js"></script>
+  <link href="../themes/default/css/home/demo/slider.css" rel="Stylesheet" type="text/css" />   
+  <script type="text/javascript" src="../themes/default/css/home/demo/slider.js"></script>
+  
+  <script type="text/javascript" src="../themes/default/css/home/demo/calendar/jquery-ui-1.9.0.js"></script>   
+  <link href="../themes/default/css/home/demo/calendar/jquery-ui-1.9.0-customised.css" rel="Stylesheet" type="text/css" />  
+  
+  <script type="text/javascript" src="../themes/default/css/home/demo/news-ticker/jquery.easing.min.js"></script>
+<script type="text/javascript" src="../themes/default/css/home/demo/news-ticker/jquery.easy-ticker.js"></script>
+
+  <script type="text/javascript">
+	  $(document).ready(function()
+        {	 
+			 
+            $("#divCalendar").datepicker({
+					changeMonth: true,
+					changeYear: true,
+					onSelect: function (selectedDate) {
+						alert("You clicked on " + selectedDate.toString());
+					}
+				});
+
+            var dd = $('.ticker-items').easyTicker({
+        		direction: 'up',
+        		easing: 'easeInOutBack',
+        		speed: 'slow',
+        		interval: 6000,
+        		height: 'auto',
+        		visible: 1,
+        		mousePause: 1,
+        		controls: {
+        			up: '.up',
+        			down: '.down',
+        			toggle: '.toggle',
+        			stopText: 'Stop !!!'
+        		}
+        	}).data('easyTicker'); 
+         
+		  
+        }); 
+ </script>
+ <script type="text/javascript" src="../themes/default/css/home/demo/charts/Chart.js"></script>
+ 
+ <script type="text/javascript" src="../themes/default/css/home/demo/weather/jquery.zweatherfeed.js"></script>
+ <script type="text/javascript">
+	$(document).ready(function () {
+	  $('#display-weather').weatherfeed(['AEXX0004']);
+	});
+</script>
+</head>
+
+<body>
+
+  <header>
+  <div class="row">
+  	<div class="col-md-9">
+  	<div class="well">
+  		<h3>Home</h3>
+  	</div>
+  </div>
+    	<div class="col-md-3">
+  	<div class="well">
+  		<h3>Alerts</h3>
+  	</div>
+  </div>
+  </div>
+  </header>
+  
+  
+  <div class="row">
+  
+  	<div class="col-md-9">
+  	
+  		<p>
+  		Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras hendrerit dui ligula, quis tempus mi tincidunt ut. 
+  		Pellentesque vehicula, felis et convallis interdum, augue quam venenatis nisl, a consequat enim sapien et ante. 
+  		Nulla egestas consequat lectus id rutrum. Nunc quis orci vitae magna blandit pulvinar. 
+  		Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. 
+  		Duis gravida risus non ante egestas, sit amet feugiat enim bibendum. Vestibulum lacinia metus a rhoncus fringilla. 
+  		Suspendisse eleifend fringilla tortor, a cursus ligula euismod nec. Ut pellentesque finibus ante sed vestibulum. 
+  		Maecenas suscipit condimentum congue. 
+  		</p><p>Etiam vitae ante non justo venenatis tincidunt. Donec rutrum elementum dui vel ullamcorper. 
+  		Aenean luctus maximus justo id consequat. Aliquam a tellus tincidunt tortor mattis porttitor et eu turpis. 
+  		Curabitur non mi quis augue molestie fringilla quis vestibulum lacus.
+  		Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras hendrerit dui ligula, quis tempus mi tincidunt ut. 
+  		Pellentesque vehicula, felis et convallis interdum, augue quam venenatis nisl, a consequat enim sapien et ante. 
+  		Nulla egestas consequat lectus id rutrum. Nunc quis orci vitae magna blandit pulvinar. 
+  		Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. 
+  		Duis gravida risus non ante egestas, sit amet feugiat enim bibendum. Vestibulum lacinia metus a rhoncus fringilla. 
+  		Suspendisse eleifend fringilla tortor, a cursus ligula euismod nec. 
+  		</p>
+  	
+  	</div>
+  	
+  	<div class="col-md-3">
+  		<div class="alertWidget1">
+<!-- start - DEMO PURPOSE ONLY -->  	
+			<div class="live-alert" class="panel-show">
+				 <div class="left_scroll"><a href="javascript:slide('left');" onfocus="this.blur();"><img src="../themes/default/css/home/demo/images/arrows/left.png"/></a></div>
+					<div class="carousel_inner">
+						<ul class="carousel_ul">
+							<li> 
+								<div class="alert-thumbnail"><img src="../themes/default/css/home/demo/images/slides/crash.png" border="0" alt=" title="/></div>	
+								<div class="status-panel-alert-subtitle">Crash</div>
+								<div class="live-alert-panel-content">
+									<font style="margin:-5px 15px 0 0px;"><b>Vehicle No:</b> K 52535<br><b>Group:</b> GAC Logistics<br><b>Driver:</b> Abdul Rahman<br><b>Location:</b> Al Quoz<br><b>Time:</b> 23/06/2013; 09:11:11 AM</font>
+								</div> 
+							</li>
+							<li>
+								<div class="alert-thumbnail"><img src="../themes/default/css/home/demo/images/slides/overspeed.png" border="0" alt=" title="/></div>
+								<div class="status-panel-alert-subtitle">Overspeeding</div>
+								<div class="live-alert-panel-content">
+									<font style="margin:-5px 15px 0 0px;"><b>Vehicle No:</b> A 31305<br><b>Group:</b> GIPAC<br><b>Driver:</b> Irfan Khalid<br><b>Location:</b> Garhoud<br><b>Time:</b> 23/06/2013; 07:09:18 AM</font>
+								</div>
+							</li>
+							<li>
+								<div class="alert-thumbnail"><img src="../themes/default/css/home/demo/images/slides/fuelempty.png" border="0" alt=" title="/></div>	
+								<div class="status-panel-alert-subtitle">Low Fuel Level</div>
+								<div class="live-alert-panel-content">
+									<font style="margin:-5px 15px 0 0px;"><b>Vehicle No:</b> Z 12325<br><b>Group:</b> Al Seef<br><b>Driver:</b> Wasim Khan<br><b>Location:</b> Rashidiya<br><b>Time:</b> 22/06/2013; 14:42:08 PM</font>
+								</div>
+							</li>            
+						</ul>
+					</div>
+				  <div class="right_scroll"><a href="javascript:slide('right');" onfocus="this.blur();"><img src="../themes/default/css/home/demo/images/arrows/right.png" /></a></div>
+				  <input type="hidden" id="hidden_auto_slide_seconds" value=0 />					 
+			</div>
+<!-- end - DEMO PURPOSE ONLY -->
+  		</div>
+  		
+  		</div>
+  	</div>
+  
+  <div class="row">
+  
+  	<div class="col-md-12">
+  		<div class="preferenceHeader">Preference</div>  		
+  		
+ 	<!-- start - DEMO PURPOSE ONLY -->
+ 		
+ 		<div class="chart-holder">
+<!--  			<iframe src="../themes/default/css/home/demo/charts/samples/pie.html" width="280" height="250" allowtransparency="true" frameborder="0" name="humidity" id="humidity" scrolling="no"></iframe> 			 -->
+ 		<div id="calendar-panel-title">Notification Stats</div>
+ 		<div kendo-chart  k-options="notificationChartOptions" style="width:300px;height:250px"  ></div>
+<!--   		<div class="col-md-12"> -->
+<!-- 			<div class="panel panel-default"> -->
+<!-- 				<div class="panel-headingSpeed"><label class="widgetsLabel">Notification Stats</label></div> -->
+				
+<!-- 			</div> -->
+<!-- 		</div> -->
+  		</div>
+ 		<div class="chart-holder">
+ 			<iframe src="../themes/default/css/home/demo/charts/samples/radar.html" width="280" height="250" allowtransparency="true" frameborder="0" name="humidity" id="humidity" scrolling="no"></iframe> 			
+  		</div>
+<!--   		<div class="chart-holder"> -->
+<!--  			<iframe src="../themes/default/css/home/demo/charts/samples/polar-area.html" width="280" height="250" allowtransparency="true" frameborder="0" name="humidity" id="humidity" scrolling="no"></iframe> 			 -->
+<!--   		</div> -->
+ 		<div class="chart-holder">
+ 			<div id="weather-title">Weather Forecast</div>
+ 			<div id="display-weather"></div> 			
+  		</div>
+ 		
+ 	
+  		<div id="calendar-panel">
+			<div id="calendar-panel-title">Event Calendar</div>
+			<div id="calendar-panel-content">
+				 <div id="divCalendar"></div>
+			</div>
+		</div>
+		
+		<div class="ticker-panel">
+			<div class="ticker-item-title">Latest Updates:</div>
+			<div class="ticker-items">
+				<ul>
+					<li>Japan volcano: 30 hikers feared dead on Mt Ontake..........<a href="http://www.bbc.com/news/world-asia-29399306" target="_blank">more >></a></li>
+					<li>Hong Kong government promises new round of consultations on electoral reform, amid tense stand-off with protesters..........<a href="http://www.bbc.com/news/world-asia-china-29398962" target="_blank">more >></a></li>
+					<li>India's Modi calls for reform in speech to UN..........<a href="http://www.bbc.com/news/world-asia-india-29373722" target="_blank">more >></a></li>
+					<li><a href="http://www.bbc.com/sport/0/golf/29396543" target="_blank">Ryder Cup 2014</a>: Paul McGinley seeks to clinch European victory</li>
+					<li><a href="http://www.bbc.com/sport/0/formula1/29319902" target="_blank">Formula 1</a>: Lewis Hamilton determined to break Suzuka duck</li>
+				</ul>
+			</div>
+			<div class="ticker-controls">			
+				<div class="up"><img src="../themes/default/images/icons/white/up-arrow.png"></div>
+				<div class="down"><img src="../themes/default/images/icons/white/down-arrow.png"></div> 
+			 </div>
+		</div>
+		
+  	<!-- end - DEMO PURPOSE ONLY -->
+ 		
+  		
+  	</div>  	
+  
+  </div>  
+</body>
+
+</html>

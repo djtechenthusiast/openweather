@@ -1,0 +1,19 @@
+{
+  "name": "locater",
+  "version": "1.0.0",
+  "description": "provide weather info based on location",
+  "main": "config/app.js",
+  "dependencies": {
+    "express-session": "^1.8.2",
+    "express": "^3.4.6"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "node config/server.js"
+  },
+  "keywords": [
+    "weather"
+  ],
+  "author": "jay",
+  "license": "ISC"
+}

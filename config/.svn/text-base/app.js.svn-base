@@ -1,0 +1,240 @@
+/**
+* Copyright 2014 Pacific Controls Software Services LLC (PCSS). All Rights Reserved.
+*
+* This software is the property of Pacific Controls  Software  Services LLC  and  its
+* suppliers. The intellectual and technical concepts contained herein are proprietary 
+* to PCSS. Dissemination of this information or  reproduction  of  this  material  is
+* strictly forbidden  unless  prior  written  permission  is  obtained  from  Pacific 
+* Controls Software Services.
+* 
+* PCSS MAKES NO REPRESENTATION OR WARRANTIES ABOUT THE SUITABILITY  OF  THE  SOFTWARE,
+* EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE  IMPLIED  WARRANTIES  OF
+* MERCHANTANILITY, FITNESS FOR A PARTICULAR PURPOSE,  OR  NON-INFRINGMENT.  PCSS SHALL
+* NOT BE LIABLE FOR ANY DAMAGES SUFFERED BY LICENSEE AS A RESULT OF  USING,  MODIFYING
+* OR DISTRIBUTING THIS SOFTWARE OR ITS DERIVATIVES.
+*/
+
+/**
+ * Version    :    1.0 
+ * User       :    pcseg306
+ * Function   :    This file is main config file (like a config constructor) do not change the main 
+ * 				   settings except for variable names. 
+ */
+
+
+var gxMainApp = angular.module("gxMainApp", ['ui.router','ngGrid','ngRoute','ngDialog','ngTable','ngCookies',
+                                             'ngAnimate','ui.bootstrap','ui','leaflet-directive','dndLists',
+                                             'ng-context-menu','angularTreeview',
+                                             'builder', 'builder.directive','builder.controller','builder.drag','builder.provider','builder.components', 'validator.rules','kendo.directives','multi-select']);
+
+//for routing the application
+gxMainApp.config(['$stateProvider', '$urlRouterProvider',function($stateProvider,$urlRouterProvider){
+	$stateProvider.
+		state('login',{
+			url:'/Login',
+			templateUrl:'../views/loginFlow/gxLogin.html',
+			controller:'loginFlowController'
+		}).	
+		state('home',{ 
+			url:'/Home',
+			templateUrl:'../views/home/gxHome.html',
+			controller:'homeController'
+		}).	
+		state('forgot_password',{ 
+			url:'/Forgot_Password',
+			templateUrl:'../views/loginFlow/gxForgotPassword.html'
+		}).	
+		state('home.homeDefault',{ 
+			url:'/',
+			templateUrl:'../views/home/gxHomeDefault.html',
+			controller: 'homeDefaultController'
+		}).	
+		state('home.favorites',{ 
+			url:'/Favorites',
+			templateUrl:'../views/home/gxFavorites.html'
+		}).
+		state('home.dashboard',{ 
+			url:'/Dashboard',
+			templateUrl:'../views/home/gxDashboard.html'
+		}).
+		state('home.help',{ 
+			url:'/Help',
+			templateUrl:'../views/home/gxHelp.html'
+		}).
+		state('home.profile',{ 
+			url:'/Profile',
+			templateUrl:'../views/home/gxProfile.html'
+		}).
+		state('Registration', {
+			url:'/Registration',
+			templateUrl: '../views/loginFlow/gxRegistration.html',
+	        controller : 'registrationFlowController'
+	    }).
+	    state('PlanFeatures', {
+			url:'/PlanFeatures',
+			templateUrl: '../views/adminNotification/gxPlannedFeatures.html',
+	        controller : ''
+	    }).
+	    state('Forgot_Password', {
+	    	url:'/Forgot_Password',
+			templateUrl: '../views/loginFlow/gxForgotPassword.html',
+	        controller : 'loginFlowController'
+	    }).	 
+	    state('Set_Password', {
+	    	url:'/Set_Password',
+			templateUrl: '../views/loginFlow/gxResetPassword.html',
+	        controller : 'resetPasswordController'
+	    }).	 
+	    state('Reset_Password', {
+	    	url:'/Reset_Password',
+			templateUrl: '../views/loginFlow/gxForgotPassword.html',
+	        controller : 'resetPasswordController'
+	    }).	 
+	    state('home.Manage Users',{
+			url:'/UserManagement',
+	    	templateUrl : '../views/userManagement/gxManageUsers.html',
+	    	controller : 'manageUsersController'
+	    }).	    
+	    state('home.CreateUsers', {
+			  url:'/CreateUsers',
+	          templateUrl: '../views/userManagement/gxCreateUsers.html',
+	          controller: 'userFormController'
+	    }).	    
+		state('home.EditUsers', {
+			  url:'/EditUsers',
+			  templateUrl: '../views/userManagement/gxEditUsers.html',
+			  controller: 'userFormController'
+		}).		
+		state('home.ViewUsers', {
+			  url:'/ViewUsers',
+			  templateUrl: '../views/userManagement/gxViewUsers.html',
+			  controller: 'userFormController'
+		}).
+		state('home.ActionUsers', {
+			  url:'/ActionUsers',
+			  templateUrl: '../views/userManagement/gxActionUser.html',
+			  controller: 'userFormController'
+		}).	
+		state('home.ImportClients', {
+			  url:'/ImportClients',
+			  templateUrl: '../views/userManagement/gxImportClients.html',
+			  controller: ''
+		}).		
+	    state('home.Manage Roles',{
+	    	url :'/RoleManagement',
+	    	templateUrl : '../views/roleManagement/gxRoleMgnt.html',
+	    	controller : 'roleManagementController'
+	    }).
+	    state('home.Prospect Notifications',{
+	    	url:'/AdminNotifications',
+	    	templateUrl : '../views/adminNotification/gxNotification.html',
+	    	controller : 'adminNotificationController'
+	    }).	   
+	    state('home.CreateRole', {
+			  url:'/CreateRole',
+	          templateUrl: '../views/roleManagement/gxCreateRole.html',
+	          controller: 'roleOperationsController'
+	    }).
+	    state('home.ActionRole', {
+			  url:'/ActionRole',
+	          templateUrl: '../views/roleManagement/gxActionRole.html',
+	          controller: 'roleOperationsController'
+	    }).	
+	    state('home.Manage Entities',{
+	    	url :'/EntityManagement',
+	    	templateUrl : '../views/entityManagement/gxEntityManagement.html',
+	    	controller : 'entityManagementController'
+	    }).
+	    state('home.Manage Hierarchy',{
+	    	url :'/HierarchyManagement',
+	    	templateUrl : '../views/hierarchyManagement/gxHierarchyManagement.html',
+	    	controller : 'hierarchyManagementController'
+	    }).
+	    state('home.CreateClientEntity',{
+	    	url :'/CreateClientEntity',
+	    	templateUrl : '../views/entityManagement/gxCreateClientEntity.html',
+	    	controller : 'entityManagementController'
+	    }).
+	    state('home.ActionAssetTemplate',{
+	    	url :'/ActionAssetTeamplate',
+	    	templateUrl : '../views/entityManagement/gxActionAssetTemp.html',
+	    	controller : 'entityManagementController'
+	    }).
+	    state('home.ActionClientTemplate',{
+	    	url :'/ActionClientTeamplate',
+	    	templateUrl : '../views/entityManagement/gxActionClientTemp.html',
+	    	controller : 'entityManagementController'
+	    }).
+	    state('home.ActionDeviceTemplate',{
+	    	url :'/ActionDeviceTeamplate',
+	    	templateUrl : '../views/entityManagement/gxActionDeviceTemp.html',
+	    	controller : 'entityManagementController'
+	    }).
+	    state('home.FeatureListdetails',{
+	    	url :'/FeatureListdetails',
+	    	templateUrl : '../views/entityManagement/gxFeatureListdetails.html',
+	    	controller : 'entityManagementController'
+	    }).
+	    state('home.Create Client Entity',{
+	    	url :'/CreateClientEntity',
+	    	templateUrl : '../views/entityManagement/gxCreateClientEntity.html',
+	    	controller : 'entityManagementController'
+	    }).
+	    state('home.Create Asset Entity',{
+	    	url :'/CreateAssetEntity',
+	    	templateUrl : '../views/entityManagement/gxCreateAssetEntity.html',
+	    	controller : 'entityManagementController'
+	    }).
+	    state('home.Create Device Entity',{
+	    	url :'/CreateDeviceEntity',
+	    	templateUrl : '../views/entityManagement/gxCreateDeviceEntity.html',
+	    	controller : 'entityManagementController'
+	    }).
+	    state('home.Manage Entity Template',{
+	    	url :'/TemplateManagement',
+	    	templateUrl : '../views/templateManagement/gxManageEntityTemplate.html',
+	    	controller : 'manageTemplateController'
+	    }).
+	    state('home.ActionManageEntityTemp',{
+	    	url :'/TemplateManagementDetails',
+	    	templateUrl : '../views/templateManagement/gxActionManageEntityTemp.html',
+	    	controller : 'manageTemplateEditorController'
+	    }).
+	    state('home.Live Tracking', {
+			  url:'/Application_LiveTracking',
+	          templateUrl: '../views/applications/mapDemo/gxMapApp.html',
+	          controller: 'gisCtrl'
+	    }).
+	    state('ResetPasswordConfirmation', {
+			url:'/Registration',
+			templateUrl: '../views/loginFlow/gxResetConfirmation.html',
+	        controller : 'resetPasswordController'
+	    }).
+	    state('home.Dashboard Designer', {
+			url:'/DashboardDesigner',
+			templateUrl: '../views/designerComp/dashboard/gxDashboardDesigner.html'
+	    }).
+	    state('home.Dashboard Designer2', {
+			url:'/MapDemoOriginal',
+			templateUrl: '../views/applications/mapDemo/gxMapDemo.html',
+		    controller: 'gisCtrl'
+	    }).
+	    state('home.UI Designer', {
+			url:'/UIDesigner',
+			templateUrl: '../views/designerComp/uiFormBuilder/gxUIDesignerHome.html',
+			controller: 'uiFormBuilderController'
+	    }).
+	    state('home.Manage Communication Channel', {
+			url:'/comchannelManagement',
+			templateUrl: '../views/comchannelManagement/gxManageComChannel.html',
+			controller : 'comchannelOperationsController'
+	    }).
+	    state('ConfirmPlannedFeatures', {	       
+	    	 url:'/ConfirmPlannedFeatures',
+	          templateUrl: '../views/adminNotification/gxConfirmPlannedFeatures.html',
+	          controller: 'confirmFeaturesController',
+	          reloadOnSearch:false
+	         
+	    }); 
+		$urlRouterProvider.otherwise('/Login');
+}]);

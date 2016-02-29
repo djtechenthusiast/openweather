@@ -1,0 +1,50 @@
+10
+
+dir
+2684
+http://pcshq-svnpcss.pcs.com/svn/POC/UI/Dev/galaxy-ui/themes/default
+http://pcshq-svnpcss.pcs.com/svn/POC
+
+
+
+2014-10-02T07:00:12.108286Z
+2684
+pcseg318
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+ff67637d-5107-7943-b4ba-5aa0e5ce7fae
+
+
+
+
+
+
+0
+
+css
+dir
+
+fonts
+dir
+
+images
+dir
+
+js
+dir
+
+kendo
+dir
+

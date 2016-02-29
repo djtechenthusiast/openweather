@@ -1,0 +1,20 @@
+/* BEGIN: Page Header Styles */
+.well h3 {
+	color: #66429A;
+	margin-top: 10px;
+	font-size: 21px;
+}
+
+.well {
+	min-height: 20px;
+	padding: 0px 10px 0px 10px;
+	margin-bottom: 5px;
+	margin-top: 5px;
+	background-color: #ebebeb;
+	border: 0px solid #ebebeb;
+	border-radius: 4px;
+	-webkit-box-shadow: inset 0 0px 0px rgba(0, 0, 0, 0);
+	box-shadow: inset 0 0px 0px rgba(0, 0, 0, 0);
+}
+
+/* END: Page Header Styles  */

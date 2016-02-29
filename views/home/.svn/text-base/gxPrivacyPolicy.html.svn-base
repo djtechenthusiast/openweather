@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<!--
+/**
+* Copyright 2014 Pacific Controls Software Services LLC (PCSS). All Rights Reserved.
+*
+* This software is the property of Pacific Controls  Software  Services LLC  and  its
+* suppliers. The intellectual and technical concepts contained herein are proprietary 
+* to PCSS. Dissemination of this information or  reproduction  of  this  material  is
+* strictly forbidden  unless  prior  written  permission  is  obtained  from  Pacific 
+* Controls Software Services.
+* 
+* PCSS MAKES NO REPRESENTATION OR WARRANTIES ABOUT THE SUITABILITY  OF  THE  SOFTWARE,
+* EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE  IMPLIED  WARRANTIES  OF
+* MERCHANTANILITY, FITNESS FOR A PARTICULAR PURPOSE,  OR  NON-INFRINGMENT.  PCSS SHALL
+* NOT BE LIABLE FOR ANY DAMAGES SUFFERED BY LICENSEE AS A RESULT OF  USING,  MODIFYING
+* OR DISTRIBUTING THIS SOFTWARE OR ITS DERIVATIVES.
+*/
+
+/**
+ * Version    :    1.0 
+ * User       :    pcseg306
+ * Function   :    Privacy Policy text!
+ */
+   -->
+
+<html lang="en">
+<head>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+	<link rel="stylesheet" href="../themes/default/css/home/gxPrivacyPolicy.css" />
+</head>
+<body>
+
+	<div class="modal-header">
+		<h4 class="modal-title">Privacy Policy</h4>
+	</div>
+	<div class="modal-body">  
+			<div class="row">
+				<div class="col-md-12">
+						<p>
+						  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec tortor
+						  diam, cursus id sodales non, ornare eget arcu. Aenean ullamcorper
+						  scelerisque libero, vitae blandit felis viverra in. Sed tempus malesuada
+						  tincidunt. Curabitur fringilla orci in viverra adipiscing. Aliquam nec
+						  tempor arcu, ac molestie odio. Sed in odio nec nisi condimentum
+						  accumsan. Maecenas iaculis, arcu eu lobortis cursus, sem quam tristique
+						  libero, vel auctor arcu leo sit amet risus. Phasellus in sem gravida,
+						  laoreet nunc gravida, dictum velit.
+						</p>
+				</div>
+			</div>	
+	</div>
+	<div class="modal-footer">
+		<button class="btn btn-primary" ng-click="cancel()">Close</button>		
+	</div>
+</body>
+</html>

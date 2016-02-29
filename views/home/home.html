@@ -1,0 +1,144 @@
+<!DOCTYPE html> 
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="stylesheet" href="../themes/default/css/home/home.css">
+
+</head>
+
+<body> 
+  <div class="container lower">
+  <h1 class="text-center"> WEATHER REPORT </h1>
+    <div class="row" ng-show="showWeatherReport">
+    <div class="panel panel-success">
+  <div class="panel-heading">
+    <h3 class="panel-title">{{ weatherReport.name }}, {{ weatherReport.sys.country }}</h3>
+  </div> 
+  <div class="panel-body">
+       <form class="form-horizontal">
+  <div class="form-group">
+   <div class="row">
+    <div class="col-md-4">
+    <label for="temperature" class="col-sm-4 control-label">Temperature</label>
+    <div class="col-sm-8">
+      <input type="text" class="form-control" id="temperature" placeholder="" ng-model="weatherReport.main.temp" disabled>
+    </div>
+    </div>
+    <div class="col-md-4">
+    <label for="temperaturemax" class="col-sm-4 control-label">Max</label>
+    <div class="col-sm-8">
+      <input type="text" class="form-control" id="temperaturemax" placeholder="" ng-model="weatherReport.main.temp_max" disabled>
+    </div>
+    </div>
+    <div class="col-md-4">
+    <label for="temperaturemin" class="col-sm-4 control-label">Min</label>
+    <div class="col-sm-8">
+      <input type="text" class="form-control" id="temperaturemin" placeholder="" ng-model="weatherReport.main.temp_min" disabled>
+    </div>
+    </div>
+   </div>
+  </div>
+  <div class="form-group">
+   <div class="row">
+    <div class="col-md-4">
+    <label for="pressure" class="col-sm-4 control-label">Pressure</label>
+    <div class="col-sm-8">
+      <input type="text" class="form-control" id="pressure" placeholder="" ng-model="weatherReport.main.pressure" disabled>
+    </div>
+    </div>
+    <div class="col-md-4">
+    <label for="humidity" class="col-sm-4 control-label">Humidity</label>
+    <div class="col-sm-8">
+      <input type="text" class="form-control" id="humidity" placeholder="" ng-model="weatherReport.main.humidity" disabled>
+    </div>
+    </div>
+    <div class="col-md-4">
+    <label for="clouds" class="col-sm-4 control-label">Clouds</label>
+    <div class="col-sm-8">
+      <input type="text" class="form-control" id="clouds" placeholder="" ng-model="weatherReport.clouds.all" disabled>
+    </div>
+    </div>
+   </div>
+  </div>
+  <div class="form-group">
+    <div class="row">
+    <div class="col-md-4">
+    <label for="winddegree" class="col-sm-4 control-label">Degree</label>
+    <div class="col-sm-8">
+      <input type="text" class="form-control" id="winddegree" placeholder="" ng-model="weatherReport.wind.deg" disabled>
+    </div>
+    </div>
+    <div class="col-md-4">
+    <label for="windspeed" class="col-sm-4 control-label">Speed</label>
+    <div class="col-sm-8">
+      <input type="text" class="form-control" id="windspeed" placeholder="" ng-model="weatherReport.wind.speed" disabled>
+    </div>
+    </div>
+    <div class="col-md-4">
+    <label for="base" class="col-sm-4 control-label">Base</label>
+    <div class="col-sm-8">
+      <input type="text" class="form-control" id="base" placeholder="" ng-model="weatherReport.base" disabled>
+    </div>
+    </div>
+   </div>
+  </div> 
+</form>
+ </div>
+</div>
+  <div class="form-group"> 
+    <div class="container">
+    <div class="row"> 
+   <div class="panel panel-success">
+  <div class="panel-heading">
+    <h3 class="panel-title"> Weather </h3>
+  </div> 
+  <div class="panel-body"> 
+      <ol ng-repeat="item in weatherReport.weather">
+         <li> {{ item.main }}  -  {{ item.description }}</li>
+      </ol>
+     </div>
+     </div> 
+    </div>
+    </div> 
+   </div>
+    </div>
+
+ <div class="row" ng-show="!showWeatherReport">
+    <div class="panel panel-success">
+  <div class="panel-heading">
+    <h3 class="panel-title">{{ weatherReport.name }}, {{ weatherReport.sys.country }}</h3>
+  </div> 
+  <div class="panel-body">
+       <form class="form-horizontal" name="locationForm">
+  <div class="form-group">
+    <div class="row">
+    <div class="col-md-4">
+    <label for="postalcode" class="col-sm-4 control-label" name="postalcode">Postal Code</label>
+    <div class="col-sm-8">
+      <input type="number" class="form-control" id="postalcode" placeholder="" ng-model="postalcode" required>
+    </div>
+    </div> 
+    <div class="col-md-4">
+    <label for="countrycode" class="col-sm-4 control-label">Country Code</label>
+    <div class="col-sm-8">
+      <input type="text" class="form-control" id="countrycode" placeholder="" name="countrycode" ng-pattern="/^[a-z]*$/"
+ ng-model="countrycode" required>
+     <span ng-show="locationForm.countrycode.$invalid && !locationForm.countrycode.$pristine" class="help-block">Please enter valid characters.</span>
+    </div>
+    </div>
+   </div>
+  </div> 
+  <input type="submit" class="btn btn-success" ng-click="getWeatherByPostalCode()" ng-disabled="(locationForm.countrycode.$invalid || locationForm.postalcode.$invalid)">
+</form>
+ </div>
+</div> 
+    </div>  
+
+
+ </div>
+
+</body>
+
+</html>

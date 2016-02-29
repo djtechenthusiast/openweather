@@ -1,0 +1,250 @@
+/**
+ * Copyright 2014 Pacific Controls Software Services LLC (PCSS). All Rights Reserved.
+ *
+ * This software is the property of Pacific Controls  Software  Services LLC  and  its
+ * suppliers. The intellectual and technical concepts contained herein are proprietary 
+ * to PCSS. Dissemination of this information or  reproduction  of  this  material  is
+ * strictly forbidden  unless  prior  written  permission  is  obtained  from  Pacific 
+ * Controls Software Services.
+ * 
+ * PCSS MAKES NO REPRESENTATION OR WARRANTIES ABOUT THE SUITABILITY  OF  THE  SOFTWARE,
+ * EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE  IMPLIED  WARRANTIES  OF
+ * MERCHANTANILITY, FITNESS FOR A PARTICULAR PURPOSE,  OR  NON-INFRINGMENT.  PCSS SHALL
+ * NOT BE LIABLE FOR ANY DAMAGES SUFFERED BY LICENSEE AS A RESULT OF  USING,  MODIFYING
+ * OR DISTRIBUTING THIS SOFTWARE OR ITS DERIVATIVES.
+ */
+
+/**
+ * Version : 1.0 User : pcseg316 Function : User Management Services
+ */
+
+gxMainApp.factory("gxUserManagementService", function($rootScope, $http,
+		gxAPIServiceWrapper) {
+
+	var _organizations = [];
+	var _UsersByOrganization = [];
+	var _RolesByOrganization = [];
+	var _UserId;
+	var _DomainName;
+	var _User;
+	var _deletedUser;
+	var _SelectedList;
+	var _tempOrganizations;
+	var _entityList = [];
+    var _objChildren = [];
+    var _nodeList= [];
+    var _deleteUserResult;
+    var _createUserResult;
+    var _editUserResult;
+    var _OrganizationName;
+	/**
+	 * Function to email the user the link for reset password
+	 */
+	var _mailService = function(objUser){
+		_serverUrl = $rootScope.DEV_ESB_SERVER_URL + '/galaxy/services/um/users/notify/set_password';
+		_resultPromise = gxAPIServiceWrapper.put(_serverUrl, objUser);
+		console.log("MAIL SERVICE\n");
+		console.log(_serverUrl);
+		console.log(objUser);
+		_resultPromise.then(function(data) {
+			console.log(data);
+		});
+		
+	}
+	
+	/**
+	 * @Function to access organizations data through the API service.
+	 */
+	var _getOrganizations = function(scope) {
+		var serverUrl = $rootScope.DEV_ESB_SERVER_URL + '/galaxy/services/um/domains/' + $rootScope.loggedUser.domainName + '/children';
+		var result = gxAPIServiceWrapper.get(serverUrl);
+	
+		result.then(function(data) {
+			scope.organizations=angular.copy(data.domain);
+			_organizations=angular.copy(data.domain);
+			
+			  for(i=0;i<scope.organizations.length;i++)
+		    	if(scope.organizations[i].maxUsers)
+		    	scope.organizations[i].isSelected=false;	
+		});	
+		//});
+	}
+
+	/**
+	 * @Function to access users data based on organization ID through API
+	 *           service.
+	 */
+	var _getUsersByOrganization = function(domainName, orgName, scope) {
+		var serverUrl = $rootScope.DEV_ESB_SERVER_URL + '/galaxy/services/um/users/domain/' + domainName;
+		_DomainName = domainName;
+		_OrganizationName = orgName;
+		var result = gxAPIServiceWrapper.get(serverUrl);
+		
+		result.then(function(data) {
+			_UsersByOrganization=data.user;
+			scope.usersByOrganization=data.user;
+			for(i=0;i<_UsersByOrganization.length;i++)
+				{scope.usersByOrganization[i].inde=i+1;
+				 if(scope.usersByOrganization[i].statusFlg==0)
+					 scope.usersByOrganization[i].status="Active";
+				 if(scope.usersByOrganization[i].statusFlg==1)
+					 scope.usersByOrganization[i].status="InActive";
+				 if(scope.usersByOrganization[i].statusFlg==2)
+					 scope.usersByOrganization[i].status="Delete";
+				}
+		});
+	   
+	}
+
+	var _getSelectedRows = function(selectedList) {
+		_SelectedList=selectedList;
+	}
+	
+	/**
+	 * @Function to delete user.
+	 */
+	
+	//http://10.234.31.202:9763/galaxy-is-adapter-api-1.0.0/services/um/users?user_name=ryder1&domain_name=du.pcs.com1
+	
+	var _deleteUser = function(user) {
+		var serverUrl = $rootScope.DEV_ESB_SERVER_URL + '/galaxy/services/um/users/?user_name=' + user.userName + '&domain_name=' + user.domainName ;
+		console.log(user);
+		var result = gxAPIServiceWrapper.delete(serverUrl);
+		result.then(function(data) {
+			if(!data.user)
+				_deleteUserResult=data.user.firstName;
+			else
+			{console.log('ERROR IN DELETING USER\n'); console.log(data); _deleteUserResult=data.errorMessage;}
+		});
+	}
+	
+	/**
+	 * @Function to get entity list.
+	 */
+	
+	var _getEntityRoot = function(scope) {
+		var serverUrl= $rootScope.DEV_ESB_SERVER_URL + '/galaxy/services/em/hierarchy/root?domain=jll.pcs.com&domain_type=CLIENT';
+		var result = gxAPIServiceWrapper.get(serverUrl);
+		result.then(function(data) {
+			scope.availableEntityList = data.hierarchyEntityDTO;
+		
+		});
+		
+	}
+	
+	
+var _getEntityList = function(scope, objEntity) {
+		
+		var serverUrl= $rootScope.DEV_ESB_SERVER_URL + '/galaxy/services/em/hierarchy/children';
+
+	    var result = gxAPIServiceWrapper.post(serverUrl, objEntity);
+	    _objChildren  = [];
+		result.then(function(data){
+				_objChildren = angular.copy(data.hierarchyEntityDTO);
+				scope.objChildren = angular.copy(data.hierarchyEntityDTO);
+				scope.assetList[0].subFeatureList = angular.copy(data.hierarchyEntityDTO);
+				for(i=0;i<scope.assetList[0].subFeatureList.length;i++)
+					{ scope.assetList[0].subFeatureList[i].isSelected=false;
+					scope.assetList[0].subFeatureList[i].isExpanded=false;
+					scope.assetList[0].subFeatureList[i].hasChildren=false;
+					}
+				   console.log("Inside Entity\n");
+				   console.log(scope.assetList);
+		});
+			
+	}
+	
+	
+	/**
+	 * @Function to get user ID.
+	 */
+	var _getUser = function(user) {
+
+		_User = user;
+		_UserId = user.userid;
+
+	}
+
+	var _setUser = function() {
+		return _User;
+	}
+
+	var _setDomainName = function() {
+		return _DomainName;
+	}
+	/**
+	 * @Function to access roles data based on organization ID through the API
+	 *           service.
+	 */
+	var _getRolesByOrganization = function() {
+		var serverUrl = $rootScope.DEV_ESB_SERVER_URL + '/galaxy/services/um/roles/domain/' + _DomainName ;
+		
+		var result = gxAPIServiceWrapper.get(serverUrl);
+		result.then(function(data) {
+			angular.copy(data.role, _RolesByOrganization);
+		});
+	}
+
+	/**
+	 * @Function to create new user through the API service.
+	 */
+	var _createNewUser = function(User) {
+		console.log("Input\n");console.log(User);
+		var serverUrl = $rootScope.DEV_ESB_SERVER_URL + '/galaxy/services/um/users/';
+		var result = gxAPIServiceWrapper.post(serverUrl, User);
+		console.log("Inside Create User\n");
+		console.log(serverUrl);
+		result.then(function(data) {
+			if (data.user)
+				_createUserResult=data.user.firstName;	
+			else 
+			{console.log('ERROR IN CREATING USER\n'); console.log(data); _createUserResult=data.errorMessage;}
+				
+		});
+	}
+
+	
+	/**
+	 * @Function to create new user through the API service.
+	 */
+	var _editUser = function(User) {
+		console.log("Input\n");console.log(User);
+		var serverUrl = $rootScope.DEV_ESB_SERVER_URL + '/galaxy/services/um/users/';
+		var result = gxAPIServiceWrapper.put(serverUrl, User);
+		console.log("Inside Edit User\n");
+		console.log(User);
+		result.then(function(data) {
+			if (data.user)
+				_editUserResult=data.user.firstName;
+			else 
+			{console.log('ERROR IN EDITING USER\n'); console.log(data); _editUserResult=data.errorMessage;}
+		});
+	}
+	
+	return {
+		organizations : _organizations,
+		UsersByOrganization : _UsersByOrganization,
+		UserId : _UserId,
+		User : _User,
+		RolesByOrganization : _RolesByOrganization,
+		getUser : _getUser,
+		deleteUser : _deleteUser,
+		setUser : _setUser,
+		setDomainName : _setDomainName,
+		mailService : _mailService,
+		getOrganizations : _getOrganizations,
+		getUsersByOrganization : _getUsersByOrganization,
+		getRolesByOrganization : _getRolesByOrganization,
+		createNewUser : _createNewUser,
+		editUser : _editUser,
+		entityList: _entityList,
+    	getEntityList:_getEntityList,
+        getEntityRoot:_getEntityRoot,
+        objChildren:_objChildren,
+        deleteUserResult: _deleteUserResult,
+        createUserResult: _createUserResult,
+        editUserResult: _editUserResult,
+        OrganizationName: _OrganizationName
+	};
+
+});

@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/POC/!svn/ver/2090/UI/Dev/galaxy-ui/themes/default/js
+END
+kendo.all.min.js
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/POC/!svn/ver/2090/UI/Dev/galaxy-ui/themes/default/js/kendo.all.min.js
+END
+angular-ui.min.js
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/POC/!svn/ver/2090/UI/Dev/galaxy-ui/themes/default/js/angular-ui.min.js
+END
+bootstrap.min.js
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/POC/!svn/ver/877/UI/Dev/galaxy-ui/themes/default/js/bootstrap.min.js
+END
+dialogs.min.js
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/POC/!svn/ver/2090/UI/Dev/galaxy-ui/themes/default/js/dialogs.min.js
+END

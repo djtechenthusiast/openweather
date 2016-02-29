@@ -1,0 +1,63 @@
+/*BEGIN: Modal Styles  */
+.modal-header {
+	min-height: 16.43px;
+	padding: 15px;
+	border-bottom: 0px solid #e5e5e5;
+	background-color: #00A8E7;
+}
+
+.modal-footer {
+	padding: 10px;
+	text-align: right;
+	border-top: 1px solid #e5e5e5;
+	background-color: #eaeaea;
+}
+
+.modal-title {
+	color: #FFFFFF;
+	margin-top: 0px;
+	font-size: 16px;
+	margin-bottom: 0px;
+	font-weight: 600;
+}
+
+.modal-body {
+	font-weight: 500;
+}
+
+/*END: Modal Styles  */
+
+/*BEGIN: Default Button Styles  */
+.btn-primary {
+	color: #FFFFFF;
+	background-color: #00A8E7;
+	border-color: transparent;
+	outline: none;
+}
+
+.btn-primary:hover {
+color: #FFF;
+background-color: #93268f;
+outline: none;
+border-color: transparent;
+}
+
+.btn-primary:active {
+color: #FFF;
+background-color: #93268f;
+outline: none;
+border-color: transparent;
+}
+
+.btn-primary:focus {
+color: #FFF;
+background-color: #93268f;
+outline: none;
+border-color: transparent;
+}
+
+.btn:focus, .btn:active:focus, .btn.active:focus {
+	outline:none;
+}
+
+/*END:Default Button Styles  */

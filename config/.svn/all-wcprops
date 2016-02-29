@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/POC/!svn/ver/2673/UI/Dev/galaxy-ui/config
+END
+server.js
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/POC/!svn/ver/2297/UI/Dev/galaxy-ui/config/server.js
+END
+app.js
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/POC/!svn/ver/2673/UI/Dev/galaxy-ui/config/app.js
+END
+mapServerConfig.js
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/POC/!svn/ver/1406/UI/Dev/galaxy-ui/config/mapServerConfig.js
+END

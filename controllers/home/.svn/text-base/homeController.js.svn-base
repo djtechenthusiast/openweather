@@ -1,0 +1,286 @@
+/**
+* Copyright 2014 Pacific Controls Software Services LLC (PCSS). All Rights Reserved.
+*
+* This software is the property of Pacific Controls  Software  Services LLC  and  its
+* suppliers. The intellectual and technical concepts contained herein are proprietary 
+* to PCSS. Dissemination of this information or  reproduction  of  this  material  is
+* strictly forbidden  unless  prior  written  permission  is  obtained  from  Pacific 
+* Controls Software Services.
+* 
+* PCSS MAKES NO REPRESENTATION OR WARRANTIES ABOUT THE SUITABILITY  OF  THE  SOFTWARE,
+* EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE  IMPLIED  WARRANTIES  OF
+* MERCHANTANILITY, FITNESS FOR A PARTICULAR PURPOSE,  OR  NON-INFRINGMENT.  PCSS SHALL
+* NOT BE LIABLE FOR ANY DAMAGES SUFFERED BY LICENSEE AS A RESULT OF  USING,  MODIFYING
+* OR DISTRIBUTING THIS SOFTWARE OR ITS DERIVATIVES.
+*/
+
+/**
+ * Version    :    1.0 
+ * User       :    pcseg306
+ * Function   :   This file is controller for all the control flow related to homePage
+ */
+
+gxMainApp.controller("homeController", function ($scope, $modal ,$rootScope, $state, ngDialog, homeProfileDataService,$cookieStore , adminFunctionsService) {
+	
+	
+	//get the value from $cookieStore
+	
+	/** some functions to set the variables correctly on default page landing**/	
+	
+	
+
+	$scope.alerts=$rootScope.appAlerts;
+	
+	$scope.open = function(index){
+		switch(index){
+		case 3:
+				$scope.currentMenuIndex = index;
+				$scope.currentStateName = 'Home / Favorites';
+				$state.go('home.favorites');
+				break;
+		case 5:
+			$scope.currentMenuIndex = index;
+			$scope.currentStateName = 'Home / Dashboard';
+			$state.go('home.dashboard');
+			break;
+		case 6:
+			$scope.currentMenuIndex = index;
+			$scope.currentStateName = 'Home / Help';
+			$state.go('home.help');
+			break;
+		case 7:
+			$scope.currentMenuIndex = index;
+			$scope.currentStateName = 'Home / Profile';
+			$state.go('home.profile');
+			break;
+		}
+	}
+	
+	/** Code to manipulate the pop-up close issue **/	
+		$scope.alertCount = $rootScope.notificationCount;
+		//$rootScope.loggedUser = $cookieStore.get('loggedUser');		
+		$scope.loggedUser = $rootScope.loggedUser;
+		console.log($rootScope.loggedUser)
+		if($rootScope.loggedUser.roleDTO.isDefault == true){
+			$rootScope.IS_SUPER_ADMIN =  true;
+			$scope.isAdmin = true;
+			adminFunctionsService.getNotificationArray();
+		}
+		else{
+			$rootScope.IS_SUPER_ADMIN = false;
+			$scope.isAdmin = false;
+		}
+		$scope.currentStateName =  $rootScope.currentStateName;
+		$scope.currentMenuIndex = $rootScope.homeIndex;
+		$rootScope.$watch('notificationCount',function(){
+			$scope.alertCount = $rootScope.notificationCount
+		});
+		$rootScope.$watch('loggedUser',function(){
+			$scope.loggedUser = $rootScope.loggedUser;
+			
+		});
+		$scope.openMainMenuPopUp = function (hostComponentId) {
+			$scope.value = true;
+			ngDialog.open({
+				template: '../views/home/comps/mainMenuAccordian.html',
+				className: 'ngdialog-theme-default',
+				scope:$scope
+			});
+		};	
+	
+		$scope.goToHomeDefault = function (){
+			$scope.currentStateName = 'Home';
+			$scope.currentMenuIndex = 1;
+			$state.go('home.homeDefault');
+			
+		}
+		$scope.openSuperAdminRegistrationNotifications = function() {	
+			$scope.currentMenuIndex = 4;
+			$scope.currentStateName = 'User Management / Prospect Notifications';
+			$state.go('home.Prospect Notifications');			
+				
+		};
+	$scope.goToHomeDefault();
+	  $scope.openRoleManagement= function() {	
+			window.location.href = '#RoleManagement';
+			
+	};
+	
+	$scope.hideMainMenu = function() {
+		$('.popover').css('display', 'none'); 
+	}
+	
+	$scope.routeSubModule = function(event,grpName,str) {
+		$scope.currentMenuIndex = 2;
+		$rootScope.currentStateName = grpName + ' / ' + str;
+		$scope.currentStateName = grpName + ' / ' + str;
+		console.log($scope.currentStateName);
+		$('.popover').css('display', 'none'); 
+    };
+    
+
+    $scope.showMainMenuAsOverlay = function(hostComponentId) {
+    	console.log(hostComponentId);    	
+    	console.log(hostComponentId.srcElement);
+    	
+    	var obj = hostComponentId.srcElement;
+    	console.log(obj);
+    	obj.w2overlay({ html: '<div style="padding: 10px; line-height: 150%">'+
+            '    Multi line HTML message<br>Multi line HTML message<br>Multi line HTML message<br>'+
+            '</div>'});
+    }
+    
+    
+    
+    /**
+	 * @Function(change the state to privacy policy)
+	 */
+	
+	$scope.goToPrivacyPolicy = function(){
+		//$state.go('forgot_password');
+		//open the pop up here  
+		
+		 var modalInstance = $modal.open({
+		      templateUrl: 'views/home/gxPrivacyPolicy.html',			   
+		      size: 'md',
+		      controller : PrivacyPolicyController,
+		      resolve : {						
+					parentScope :function(){
+						return $scope;
+					}	
+				}
+		    });
+
+		    modalInstance.result.then(function (selectedItem) {
+		     console.log('clicked OK');
+		    }, function () {
+		    	   console.log('clicked Cancel');
+		    });
+		
+	}	
+	
+	/**
+	 * @Function : This function is a controller function for privacy policy
+	 */
+		var PrivacyPolicyController = function($scope, $modalInstance,parentScope) {
+			$scope.parentScope = parentScope;				
+			$scope.cancel = function() {
+				$modalInstance.dismiss('cancel');
+			};
+		};
+		
+	
+	    
+	    /**
+		 * @Function(change the state to terms conditions)
+		 */
+		
+		$scope.goToTermsConditions = function(){
+			//$state.go('forgot_password');
+			//open the pop up here  
+			
+			 var modalInstance = $modal.open({
+			      templateUrl: 'views/home/gxTermsConditions.html',			   
+			      size: 'md',
+			      controller : TermsConditionsController,
+			      resolve : {						
+						parentScope :function(){
+							return $scope;
+						}	
+					}
+			    });
+
+			    modalInstance.result.then(function (selectedItem) {
+			     console.log('clicked OK');
+			    }, function () {
+			    	   console.log('clicked Cancel');
+			    });
+			
+		}
+
+		
+	/**
+	 * @Function : This function is a controller function for ForgotPasswordController
+	 */
+			var TermsConditionsController = function($scope, $modalInstance,parentScope) {
+				$scope.parentScope = parentScope;				
+				$scope.cancel = function() {
+					$modalInstance.dismiss('cancel');
+				};
+			};
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+});
+
+
+
+gxMainApp.controller('MainController',function ($scope,homeProfileDataService,$cookieStore) {
+//		$scope.menuArray = homeProfileDataService.menuArray;
+//		homeProfileDataService.getMenuArray();
+		
+		
+	function sortByKey(array, key) {
+	    return array.sort(function(a, b) {
+	        var x = a[key]; var y = b[key];
+	        return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+	    });
+	}
+	
+		//parse the array for grouping in categories. 
+		var cookieObj =  $cookieStore.get('roleDTO');
+		
+		var menuArray = angular.copy(cookieObj.menus);
+		var categoryHashMap = {};
+		for(var i=0;i<menuArray.length;i++){
+			
+			var objMenuItem = menuArray[i];
+			if(categoryHashMap[objMenuItem.categoryName] == null){
+				categoryHashMap[objMenuItem.categoryName] = {};
+				categoryHashMap[objMenuItem.categoryName].label = objMenuItem.categoryName;
+				categoryHashMap[objMenuItem.categoryName].subitems = [];
+				categoryHashMap[objMenuItem.categoryName].subitems.length = 0;
+				categoryHashMap[objMenuItem.categoryName].subitems.push({label:objMenuItem.menuName});
+				
+			}
+			else {
+				categoryHashMap[objMenuItem.categoryName].subitems.push({label:objMenuItem.menuName});
+			}			
+			
+		}
+		
+		var tempArray = [];
+		tempArray.length = 0;
+		
+		
+		for(var p in categoryHashMap){
+			tempArray.push(categoryHashMap[p]);
+		}
+		tempArray = 	sortByKey(tempArray,'label');
+		$scope.menuArray  = angular.copy(tempArray);
+		$scope.routeSubModule = function(event,grpName,str) {
+			$scope.$parent.routeSubModule(event,grpName,str);
+        };
+		
+});
+
+gxMainApp.controller('ItemController', function ($scope) {
+
+					$scope.$parent.isopen = ($scope.$parent.default === $scope.item);
+
+					$scope.$watch('isopen', function (newvalue, oldvalue, $scope) {
+						$scope.$parent.isopen = newvalue;
+		                });
+					$scope.routeSubModule = function(str) {
+		                	alert('hello' + str);
+		                	//window.location.href='#'+str;
+		                };
+		            });
